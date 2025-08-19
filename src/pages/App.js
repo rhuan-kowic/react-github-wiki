@@ -12,19 +12,25 @@ function App() {
   const [repos, setRepos] = useState([]);
 
   const handleSearchRepo = async () => {
-    const { data } = await api.get(`repos/${currentRepo}`);
+    try {
+      const { data } = await api.get(`repos/${currentRepo}`);
 
-    if (data.id) {
-      const isExist = repos.find((repo) => repo.id === data.id);
+      if (data.id) {
+        const isExist = repos.find((repo) => repo.id === data.id);
 
-      if (!isExist) {
-        setRepos((prev) => [...prev, data]);
-        setCurrentRepo("");
-        return;
+        if (!isExist) {
+          setRepos((prev) => [...prev, data]);
+          setCurrentRepo("");
+          return;
+        }
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        alert("Repositório não encontrado.");
+      } else {
+        alert("Ocorreu um erro ao buscar o repositório.");
       }
     }
-
-    alert("Repositorio nao encontrado.");
   };
 
   const handleRemoveRepo = (id) => {
