@@ -13,9 +13,14 @@ export const ItemContainer = styled.div`
     color: #fafafa60;
   }
 
-  a.remover {
+  span.remover {
     color: #ff0000;
     margin-top: 20px;
+    text-decoration: underline;
+  }
+
+  span.remover:hover {
+    cursor: pointer;
   }
 
   hr {
