@@ -26,6 +26,12 @@ function App() {
 
     alert("Repositorio nao encontrado.");
   };
+
+  const handleRemoveRepo = (id) => {
+    const reposFilters = repos.filter((repo) => repo.id !== id);
+    setRepos(reposFilters);
+  };
+
   return (
     <Container>
       <img src={gitLogo} width={72} height={72} alt="Logo GitHub" />
@@ -35,7 +41,7 @@ function App() {
       />
       <Button onClick={handleSearchRepo} />
       {repos.map((repo) => (
-        <ItemRepo repo={repo} />
+        <ItemRepo repo={repo} handleRemoveRepo={handleRemoveRepo} />
       ))}
     </Container>
   );
